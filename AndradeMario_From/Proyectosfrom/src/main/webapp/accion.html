@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:bootstrap="http://www.thymeleaf.org/extras/bootstrap">
+
+<head>
+<script src="js/acciones.js"></script>
+    <meta charset="UTF-8">
+    <title>Acciones de Compra y Venta</title>
+
+    <!-- Add Bootstrap CSS link -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <h2>Agregar nueva empresa</h2>
+        <form th:action="@{/agregarEmpresa}" method="post">
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" required>
+            </div>
+            <div class="form-group">
+                <label for="precio">Precio:</label>
+                <input type="number" class="form-control" id="precio" name="precio" required>
+            </div>
+            <div class="form-group">
+                <label for="fecha">Fecha:</label>
+                <input type="date" class="form-control" id="fecha" name="fecha" required>
+            </div>
+            <button onclick="guardarAccion()" type="submit" class="btn btn-primary">Agregar</button>
+        </form>
+
+        <h2>Costo de cada acción</h2>
+        <form th:action="@{/actualizarCosto}" method="post">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Empresa</th>
+                    
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="Acciones : ${Accion}">
+                        <td th:text="${Accion.id}"></td>
+                        <td th:text="${Accion.nombre}"></td>
+                        <td th:text="${Accion.precio}"></td>
+                        <td th:text="${Accion.fecha}"></td>
+                        <td th:text="${Accion.empresa}"></td>
+                        <td><input type="number" class="form-control" name="costo" required></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="submit" class="btn btn-primary">Actualizar Costo</button>
+        </form>
+
+        <h2>Información de empresas cuyas acciones se están vendiendo</h2>
+        <form th:action="@{/infoEmpresas}" method="post">
+            <div class="form-group">
+                <label for="vendiendo">Acciones en Venta:</label>
+                <textarea class="form-control" id="vendiendo" name="vendiendo" rows="3" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Mostrar Información</button>
+        </form>
+  	 <h2>Crear PDF de transacciones</h2>
+        <form th:action="@{/crearPDF}" method="post">
+            <button type="submit" class="btn btn-primary">Crear PDF</button>
+        </form>
+    </div>
+
+    <!-- Add Bootstrap JS dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
+        integrity="sha384-1bvPYNsRhB9hrfw1K5kh+LZeuQwXQ/ZzqRiMl71TrLgXvSZOrKipg+Nh8e2GltUo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-VoPFBDIkAriW3+qTk8mbIV9FXE2tZzN2JpJWl2jxKhbX2y0uUc+bE+4g/5KQqJW"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

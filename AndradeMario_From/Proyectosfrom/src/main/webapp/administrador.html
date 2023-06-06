@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:bootstrap="http://www.thymeleaf.org/extras/bootstrap">
+<head>
+<script src="js/administrador.js"></script>
+
+    <title>Agregar nueva empresa</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Agregar nueva empresa</h1>
+
+        <table class="table table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Username</th>
+                    <th scope="col"> Contraseña</th>
+                      <th scope="col">Compraracciones</th>
+                        <th scope="col">Venderacciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="Administrador : ${Administrador}">
+                    <td th:text="${Administrador.id}"></td>
+                    <td th:text="${Administrador.nombre}"></td>
+                    <td th:text="${Administrador.username}"></td>
+                    <td th:text="${Administrador.contraseña}"></td>
+                    <td th:text="${Administrador.compraracciones}"></td>
+                    <td th:text="${Administrador.venderacciones}"></td>
+                    
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Comprar acciones</h2>
+        <form th:action="@{/comprarAcciones}" method="post">
+            <div class="form-group">
+                <label for="empresa">Empresa:</label>
+                <select class="form-control" id="empresa" name="empresa" required>
+                    <option th:each="empresa : ${empresas}" th:value="${empresa.id}" th:text="${empresa.nombre}"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="cantidad">Cantidad:</label>
+                <input type="number" class="form-control" id="cantidad" name="cantidad" required>
+            </div>
+            <button onclick="guardarAccion()" type="submit" class="btn btn-primary">Comprar</button>
+        </form>
+
+        <h2>Crear PDF de transacciones</h2>
+        <form th:action="@{/crearPDF}" method="post">
+            <button type="submit" class="btn btn-primary">Crear PDF</button>
+        </form>
+    </div>
+
+    <!-- Add Bootstrap JS dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-1bvPYNsRhB9hrfw1K5kh+LZeuQwXQ/ZzqRiMl71TrLgXvSZOrKipg+Nh8e2GltUo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-VoPFBDIkAriW3+qTk8mbIV9FXE2tZzN2JpJWl2jxKhbX2y0uUc+bE+4g/5KQqJW" crossorigin="anonymous"></script>
+</body>
+</html>
